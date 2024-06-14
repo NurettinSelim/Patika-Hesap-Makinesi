@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesap Makinesi</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            height: 50px;
+            font-size: 20px;
+            text-align: right;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 230px;
+        }
+
+        button {
+            height: 50px;
+        }
+
+        .span-button {
+            grid-column: span 4;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hesap Makinesi</h1>
+    <input type="text" disabled id="output">
+    <br>
+    <div class="calc-grid">
+        <button class="span-button" onclick="clearOutput()">Temizle</button>
+        <button onclick="addDigit(1)">1</button>
+        <button onclick="addDigit(2)">2</button>
+        <button onclick="addDigit(3)">3</button>
+        <button onclick="addOperator('+')">+</button>
+        <button onclick="addDigit(4)">4</button>
+        <button onclick="addDigit(5)">5</button>
+        <button onclick="addDigit(6)">6</button>
+        <button onclick="addOperator('-')">-</button>
+        <button onclick="addDigit(7)">7</button>
+        <button onclick="addDigit(8)">8</button>
+        <button onclick="addDigit(9)">9</button>
+        <button onclick="addOperator('*')">*</button>
+        <button class="span-button" onclick="calculate()">Hesapla</button>
+    </div>
+
+    <script>
+        let output = document.getElementById("output")
+
+        function clearOutput() {
+            output.value = ""
+        }
+
+        function addDigit(digit) {
+            output.value += digit
+        }
+
+        function addOperator(operator) {
+            output.value += " " + operator + " "
+        }
+
+        function calculate() {
+            // output.value = "23 + 45"
+            let parts = output.value.split(" ")
+            let firstVal = parseInt(parts[0])
+            let secondVal = parseInt(parts[2])
+            let operator = parts[1]
+
+            let result
+
+            if (operator == "+") {
+                result = firstVal + secondVal
+            } else if (operator == "-") {
+                result = firstVal - secondVal
+
+            } else if (operator == "*") {
+                result = firstVal * secondVal
+            }
+            output.value = result
+        }
+
+    </script>
+
+</body>
+
+</html>
